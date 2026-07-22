@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio LUMINA ｜ 事業ダッシュボード</title>
+<style>
+  :root{
+    --ink:#20130A;--ink2:#5C4A3A;--paper:#FBF7F0;--paper2:#F3EBDD;--line:#E4D8C4;
+    --amber:#EF9F27;--coral:#D9542A;--coral-d:#A83B18;--teal:#2E7D6F;--indigo:#3A5A9B;
+    --moss:#6E8B3D;--plum:#7A4A6E;--done:#5C9A54;--wait:#E0912B;--review:#C64B2C;
+    --glow: 0 2px 20px rgba(217,84,42,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(239,159,39,.10), transparent 60%),
+      radial-gradient(900px 400px at -10% 5%, rgba(217,84,42,.08), transparent 55%),
+      var(--paper);
+    color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;padding:0 16px 80px;
+  }
+  .wrap{max-width:1120px;margin:0 auto}
+  header{padding:44px 0 8px;text-align:center;position:relative}
+  .logo{display:inline-flex;align-items:center;gap:18px;margin-bottom:18px}
+  .mark{width:60px;height:60px;position:relative;flex:none}
+  .mark .ring{position:absolute;inset:0;border:2.5px dashed var(--amber);border-radius:50%;animation:spin 40s linear infinite}
+  .mark .ring2{position:absolute;inset:11px;border:4px solid var(--coral);border-radius:50%}
+  .mark .dot{position:absolute;inset:22px;background:var(--amber);border-radius:50%}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.mark .ring{animation:none}}
+  .logo .lt{text-align:left;line-height:1.15}
+  .logo .lt small{display:block;font-size:15px;letter-spacing:5px;color:var(--ink2);font-weight:600}
+  .logo .lt b{font-size:40px;letter-spacing:5px;font-weight:800;color:var(--ink)}
+  .kicker{font-size:12.5px;letter-spacing:3px;color:var(--coral-d);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+  h1.title{font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  .lede{max-width:760px;margin:0 auto;color:var(--ink2);font-size:15px}
+  .asof{margin-top:14px;font-size:12px;color:var(--ink2);opacity:.8}
+
+  .verdict{margin:30px auto 8px;max-width:900px;background:linear-gradient(100deg,#20130A,#3a2213);
+    color:#FBF7F0;border-radius:20px;padding:24px 28px;box-shadow:0 18px 50px rgba(32,19,10,.28);position:relative;overflow:hidden}
+  .verdict::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(239,159,39,.35),transparent 65%)}
+  .verdict .vh{font-size:12px;letter-spacing:3px;color:var(--amber);font-weight:700;margin-bottom:8px}
+  .verdict p{font-size:15.5px;position:relative;z-index:1}
+  .verdict b{color:var(--amber)}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 8px}
+  @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;box-shadow:var(--glow);position:relative}
+  .kpi .n{font-size:32px;font-weight:800;letter-spacing:.5px;line-height:1}
+  .kpi .n small{font-size:15px;font-weight:700;color:var(--ink2)}
+  .kpi .l{font-size:12.5px;color:var(--ink2);margin-top:7px;font-weight:600}
+  .kpi .s{font-size:11px;color:var(--ink2);opacity:.75;margin-top:2px}
+  .kpi.c1 .n{color:var(--coral)} .kpi.c2 .n{color:var(--teal)} .kpi.c3 .n{color:var(--indigo)} .kpi.c4 .n{color:var(--amber)}
+
+  .sec{margin:46px 0 18px;display:flex;align-items:baseline;gap:14px}
+  .sec .no{font-size:13px;font-weight:800;color:#fff;background:var(--coral);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 4px 12px rgba(217,84,42,.3)}
+  .sec h2{font-size:20px;font-weight:800;letter-spacing:.5px}
+  .sec .cap{font-size:12.5px;color:var(--ink2);margin-left:auto;text-align:right;max-width:340px}
+
+  .funnel{display:flex;flex-direction:column;align-items:center;gap:0;margin:6px 0}
+  .fstage{width:100%;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;text-align:center;padding:16px 12px;clip-path:polygon(0 0,100% 0,94% 100%,6% 100%);margin-bottom:6px;box-shadow:0 6px 16px rgba(32,19,10,.10)}
+  .fstage .inner{display:flex;flex-direction:column;gap:2px}
+  .fstage .fn{font-size:24px;font-weight:800;line-height:1}
+  .fstage .fl{font-size:12.5px;font-weight:700;opacity:.95}
+  .fstage .fs{font-size:11px;font-weight:500;opacity:.85}
+  .f1{background:linear-gradient(100deg,#3A5A9B,#4A6BB0);width:100%}
+  .f2{background:linear-gradient(100deg,#2E7D6F,#3a9384);width:82%}
+  .f3{background:linear-gradient(100deg,#C98A1E,#EF9F27);width:60%}
+  .f4{background:linear-gradient(100deg,#D9542A,#E56B3E);width:42%}
+  .f5{background:linear-gradient(100deg,#A83B18,#C64B2C);width:26%}
+  .farrow{font-size:14px;color:var(--ink2);opacity:.5;margin:-2px 0 4px}
+  .fnote{margin-top:10px;background:var(--paper2);border-radius:12px;padding:12px 16px;font-size:12px;color:var(--ink2);text-align:center;line-height:1.7}
+  .fnote b{color:var(--ink)}
+
+  .flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:820px){.flow{grid-template-columns:1fr}}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;position:relative;box-shadow:var(--glow)}
+  .fcard .ic{font-size:22px;margin-bottom:8px}
+  .fcard h3{font-size:15.5px;font-weight:800;margin-bottom:4px}
+  .fcard .role{font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+  .fcard.a .role{color:var(--indigo)} .fcard.b .role{color:var(--coral)} .fcard.c .role{color:var(--teal)}
+  .fcard p{font-size:13px;color:var(--ink2)}
+  .fcard ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:7px}
+  .fcard li{font-size:12.5px;color:var(--ink);padding-left:18px;position:relative}
+  .fcard li::before{content:"→";position:absolute;left:0;color:var(--coral);font-weight:700}
+  .moneyflow{margin-top:16px;background:var(--paper2);border-radius:14px;padding:14px 16px;font-size:12.5px;color:var(--ink2);text-align:center}
+  .moneyflow b{color:var(--ink)}
+
+  .tl{position:relative;margin-left:8px;padding-left:28px}
+  .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--amber),var(--coral),var(--line))}
+  .ev{position:relative;margin-bottom:20px}
+  .ev::before{content:"";position:absolute;left:-28px;top:4px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--coral)}
+  .ev.done::before{background:var(--done);border-color:var(--done)}
+  .ev.prog::before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 5px rgba(239,159,39,.22)}
+  .ev .d{font-size:11.5px;font-weight:700;color:var(--coral-d);letter-spacing:.5px}
+  .ev h4{font-size:14.5px;font-weight:800;margin:2px 0 3px}
+  .ev p{font-size:12.5px;color:var(--ink2)}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:1px}
+  .b-done{background:rgba(92,154,84,.16);color:var(--done)}
+  .b-prog{background:rgba(239,159,39,.18);color:#9a6410}
+
+  .streams{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.streams{grid-template-columns:1fr}}
+  .st{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--glow)}
+  .st .sh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .st .g{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;flex:none}
+  .st.s1 .g{background:var(--teal)} .st.s2 .g{background:var(--plum)} .st.s3 .g{background:var(--indigo)} .st.s4 .g{background:var(--moss)}
+  .st .sh h3{font-size:15px;font-weight:800}
+  .st .sh .sub{font-size:11px;color:var(--ink2)}
+  .st .mini{margin-left:auto;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:20px}
+  .task{display:flex;gap:9px;font-size:12.5px;padding:5px 0;border-top:1px dashed var(--line)}
+  .task:first-of-type{border-top:none}
+  .task .ck{flex:none;width:17px;height:17px;border-radius:5px;display:grid;place-items:center;font-size:11px;margin-top:2px;font-weight:800}
+  .ck.d{background:var(--done);color:#fff} .ck.w{background:var(--wait);color:#fff} .ck.r{background:#fff;border:2px solid var(--review);color:var(--review)}
+  .task .tx b{font-weight:700}
+  .task .tx span{color:var(--ink2)}
+
+  .atk{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--glow)}
+  .atk table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .atk th{background:var(--ink);color:var(--paper);font-weight:700;font-size:11.5px;padding:11px 12px;text-align:left;letter-spacing:.5px}
+  .atk td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .atk tr:nth-child(even) td{background:var(--paper)}
+  .atk .big{font-weight:800;font-size:14px}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .p-live{background:rgba(217,84,42,.15);color:var(--coral-d)}
+  .p-sent{background:rgba(92,154,84,.16);color:var(--done)}
+  .p-stop{background:rgba(120,74,110,.14);color:var(--plum)}
+  .p-low{background:#eee7d8;color:var(--ink2)}
+  .tsum{background:var(--paper2);padding:12px 16px;font-size:12px;color:var(--ink2);display:flex;flex-wrap:wrap;gap:18px}
+  .tsum b{color:var(--ink)}
+
+  .ab{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.ab{grid-template-columns:1fr}}
+  .abx{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--glow);position:relative;overflow:hidden}
+  .abx .tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#fff;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px}
+  .abx.x1 .tag{background:var(--coral)} .abx.x2 .tag{background:var(--indigo)}
+  .abx h3{font-size:14.5px;font-weight:800;margin-bottom:4px}
+  .abx .num{font-size:26px;font-weight:800;margin:8px 0 2px}
+  .abx.x1 .num{color:var(--coral)} .abx.x2 .num{color:var(--indigo)}
+  .abx p{font-size:12.5px;color:var(--ink2)}
+
+  .risk{margin-top:24px;background:linear-gradient(100deg,#3a1f14,#5a2a17);color:#FBF3E8;border-radius:16px;padding:20px 24px}
+  .risk h3{font-size:14px;font-weight:800;color:var(--amber);margin-bottom:6px;letter-spacing:.5px}
+  .risk p{font-size:13px}
+  .risk b{color:#fff}
+
+  footer{margin-top:40px;text-align:center;font-size:11.5px;color:var(--ink2);opacity:.8;line-height:1.9}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:14px 0 0;font-size:11.5px;color:var(--ink2)}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">
+      <div class="mark"><span class="ring"></span><span class="ring2"></span><span class="dot"></span></div>
+      <div class="lt"><small>STUDIO</small><b>LUMINA</b></div>
+    </div>
+    <div class="kicker">事業ダッシュボード ／ 全体まとめ</div>
+    <h1 class="title">「歌うこと」が、あなたの毎日を照らす。</h1>
+    <p class="lede">月謝制ボイストレーニング事業「Studio LUMINA」の、これまでの実績・進行中の施策・全体構造を1枚に。チーム全体の目線合わせ用。</p>
+    <div class="asof">出典：Slack #proj-ボイトレ事業-studio-lumina ／ 共有Drive　・　集計基準：2026年7月21日時点</div>
+  </header>
+
+  <div class="verdict">
+    <div class="vh">サマリー</div>
+    <p>LUMINAは<b>「設計」から「稼働」フェーズ</b>に移行済み。7/10に初の無料体験レッスンがスタートし、以降<b>体験レッスンの予約・実施が継続的に発生</b>、うち<b>学生1名が入会検討</b>まで到達している。7/21時点の主要な進行施策は2つ——<b>①既存リスト計9,670人への大量配信（AB第二弾）</b>と、<b>②本入会フロー（フォーム→プラン選択→Stripe決済）の確定</b>。いずれもKPI（＝MP+送客／入会）に直結するため優先度は最上位。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi c1"><div class="n">7/10</div><div class="l">初の無料体験スタート</div><div class="s">初日2件の予約から立ち上がり</div></div>
+    <div class="kpi c2"><div class="n">2<small>名</small></div><div class="l">初回体験レッスン実施済み</div><div class="s">7/11実施・MP不合格属性</div></div>
+    <div class="kpi c3"><div class="n">1<small>名</small></div><div class="l">入会検討まで到達</div><div class="s">学生・支払い開始時期がネック</div></div>
+    <div class="kpi c4"><div class="n">9,670<small>人</small></div><div class="l">AB第二弾の配信母数</div><div class="s">まねき7,170＋LUMINA枠2,500</div></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--done)"></i>完了・稼働中</span>
+    <span><i style="background:var(--wait)"></i>進行中・確認待ち</span>
+    <span><i style="background:var(--review)"></i>意思決定が必要</span>
+  </div>
+
+  <div class="sec"><span class="no">1</span><h2>コンバージョンファネル</h2><span class="cap">配信 → LINE登録 → 体験予約 → 体験実施 → 入会。上流の母数と下流の実数を1本で。</span></div>
+  <div class="funnel">
+    <div class="fstage f1"><div class="inner"><div class="fn">9,670人</div><div class="fl">① 配信対象（AB第二弾）</div><div class="fs">まねき7,170＋LUMINA枠2,500・既存リストへLINE配信</div></div></div>
+    <div class="farrow">▼</div>
+    <div class="fstage f2"><div class="inner"><div class="fn">継続流入</div><div class="fl">② LINE登録 / 無料体験フォーム同意</div><div class="fs">7/8以降、同意フォーム回答が連日着信</div></div></div>
+    <div class="farrow">▼</div>
+    <div class="fstage f3"><div class="inner"><div class="fn">継続発生</div><div class="fl">③ 無料体験レッスン予約</div><div class="fs">7/10初日2件を皮切りに予約が積み上がり</div></div></div>
+    <div class="farrow">▼</div>
+    <div class="fstage f4"><div class="inner"><div class="fn">2名</div><div class="fl">④ 無料体験レッスン実施</div><div class="fs">7/11実施・SP・リスケなく完了</div></div></div>
+    <div class="farrow">▼</div>
+    <div class="fstage f5"><div class="inner"><div class="fn">1名</div><div class="fl">⑤ 入会検討</div><div class="fs">学生1名・受講開始時期がネックで保留</div></div></div>
+  </div>
+  <div class="fnote">
+    <b>上流（①②③）</b>は母数が大きく、AB第二弾でさらに厚くなる見込み。<b>下流（④⑤）</b>はまだ実数が小さく、体験→入会の転換設計が伸びしろ。<br>
+    ※予約・実施・入会の確定集計はスプレッドで別管理。本図の下流実数は7/11実施分に基づく把握値。
+  </div>
+
+  <div class="sec"><span class="no">2</span><h2>事業の全体像</h2><span class="cap">顧客・アプラ・講師の三者。アプラは「場」を提供する仲介者。</span></div>
+  <div class="flow">
+    <div class="fcard a">
+      <div class="ic">🎤</div><div class="role">顧客 / 受講者</div>
+      <h3>過去のMP離脱者が中心</h3>
+      <p>Music Planetに応募して離脱した既存リスト。同意済みLINEに個別案内 → 無料体験 → 月額入会へ。</p>
+      <ul><li>月2回 ¥7,000／月3回 ¥9,900／月4回 ¥12,000</li><li>入会金¥4,000は無料体験からの入会で無料</li></ul>
+    </div>
+    <div class="fcard b">
+      <div class="ic">🎯</div><div class="role">アプラ（＝場の提供者）</div>
+      <h3>集客・予約・規約・決済</h3>
+      <p>LINE案内、申込フォーム、利用規約同意、Stripe決済までの導線を運営。黒字化は目的とせず、経済圏拡張が狙い。</p>
+      <ul><li>目的＝MP+への送客・LTV向上</li><li>単体収益は当面無視（藤村・伊藤・長谷部で一致）</li></ul>
+    </div>
+    <div class="fcard c">
+      <div class="ic">🤝</div><div class="role">講師 / トレーナー</div>
+      <h3>まさき講師を軸に稼働</h3>
+      <p>マンツーマンレッスンを供給。体験→入会の営業も講師が担う設計（追加報酬）。オンライン／渋谷スタジオ。</p>
+      <ul><li>レッスン報酬 1回¥3,000（税込）</li><li>入会勧誘（営業）1回¥900（税込・45分定額）</li></ul>
+    </div>
+  </div>
+  <div class="moneyflow">お金の流れ：<b>顧客 → アプラ → 講師</b>　／　サービスの流れ：<b>講師 → 顧客（マンツーマンレッスン）</b></div>
+
+  <div class="sec"><span class="no">3</span><h2>アタック〜稼働の実績</h2><span class="cap">6月に設計、7/10に初稼働。以降レッスンが継続的に発生している。</span></div>
+  <div class="tl">
+    <div class="ev done"><div class="d">6月上旬</div><h4>事業発足・サービス名確定<span class="badge b-done">完了</span></h4><p>アカウント獲得ユニットの課題（新規が使ってくれない）から着想。名称は「Studio LUMINA」に確定。目的＝MP+送客・経済圏拡張で全員合意。</p></div>
+    <div class="ev done"><div class="d">6月中旬</div><h4>4書類の作成・リーガルチェック<span class="badge b-done">完了</span></h4><p>覚書・利用規約・重要事項表示・カバーレターを整備。特商法（通信販売該当）、報酬固定額明示、労働者性、クーリングオフ論点まで第2ラウンド反映済み。</p></div>
+    <div class="ev done"><div class="d">6/16〜6/24</div><h4>LINE一斉配信スタート（AB第一弾）<span class="badge b-done">完了</span></h4><p>新MP LINE 1,929人／不合格属性255人へ配信＆シナリオ再開。旧MP 6,388人にはBUMP施策も併走。</p></div>
+    <div class="ev done"><div class="d">7/10</div><h4>プロジェクト開始以来 初の無料体験レッスン<span class="badge b-done">完了</span></h4><p>初日で2件の予約。以降フォーム同意（＝申込）が連日着信し、予約が積み上がる状態に。</p></div>
+    <div class="ev done"><div class="d">7/11</div><h4>初回体験2名を実施 → 学生1名が入会検討<span class="badge b-done">完了</span></h4><p>2名ともMP不合格属性（休職中・学生）。学生の方が入会検討中。「支払い登録しても受講開始が9月」という点が引っかかり、その場入会に至らず → 運用改善へ。</p></div>
+    <div class="ev prog"><div class="d">7/13〜7/21</div><h4>入会後ルール整備・営業資料・FAQ整備<span class="badge b-prog">進行中</span></h4><p>まさき講師と会話し、繰越・予約締切・支払いルール等をFAQ化。講師がシアーの営業資料を提供。共有Driveも構築。特記事項の表記統一（対面／オンライン）も実施。</p></div>
+    <div class="ev prog"><div class="d">7/21</div><h4>AB第二弾のシナリオ確定・配信準備<span class="badge b-prog">進行中</span></h4><p>旧MPを軸に配信対象を確定（まねき7,170人／MP+登録条件のLUMINA 2,500人、新MP 3,543人は全員まねき枠、VP窓口は今回配信なし）。シナリオ完成済み、クリエイティブ準備の上で発射予定。</p></div>
+  </div>
+
+  <div class="sec"><span class="no">4</span><h2>AB第二弾の配信設計</h2><span class="cap">旧MP・新MP計9,670人を、2つの訴求で検証。VP窓口は今回配信なし。</span></div>
+  <div class="ab">
+    <div class="abx x1">
+      <span class="tag">A ／ LUMINA枠</span>
+      <h3>MP+アカウント登録が無料体験の条件</h3>
+      <div class="num">2,500人</div>
+      <p>旧MPの「LUMINA0721発射リスト（MP+登録が条件）」タグ保有者へ。LUMINAアタックとして配信。MP+登録を挟むことで送客導線を検証。</p>
+    </div>
+    <div class="abx x2">
+      <span class="tag">B ／ まねきクーポン枠</span>
+      <h3>アカウント登録の上でOL視聴 → まねきクーポン</h3>
+      <div class="num">7,170人</div>
+      <p>旧MP 3,627人＋新MP 3,543人（AB第一弾で配信済の500人は除外）。まねきクーポンMP+配信用として配信。</p>
+    </div>
+  </div>
+
+  <div class="sec"><span class="no">5</span><h2>4ストリームの進捗</h2><span class="cap">商品・契約・集客・供給。左上ほど固まり、右下ほど運用の詰め。</span></div>
+  <div class="streams">
+    <div class="st s1">
+      <div class="sh"><div class="g">商</div><div><h3>商品</h3><div class="sub">プラン・価格・特典</div></div><span class="mini" style="background:rgba(92,154,84,.16);color:var(--done)">確定</span></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>料金プラン確定</b> <span>月2/3/4回＝¥7,000／¥9,900／¥12,000（税込）</span></div></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>入会金・特典</b> <span>入会金¥4,000は無料体験入会で無料。特典ボイトレ2回分は入会日から1か月有効</span></div></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>繰越ルール</b> <span>翌々月末日まで繰越可</span></div></div>
+    </div>
+    <div class="st s2">
+      <div class="sh"><div class="g">契</div><div><h3>契約</h3><div class="sub">覚書・規約・リーガル</div></div><span class="mini" style="background:rgba(92,154,84,.16);color:var(--done)">反映済</span></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>覚書・利用規約・重要事項表示</b> <span>作成完了、リーガル第2ラウンド反映</span></div></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>報酬の固定額明示</b> <span>レッスン¥3,000／営業¥900（フリーランス法対応）</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>録音前提の契約書へ刷新</b> <span>無料体験の録音活用を見据えた宿題</span></div></div>
+    </div>
+    <div class="st s3">
+      <div class="sh"><div class="g">集</div><div><h3>集客</h3><div class="sub">LP・リスト・配信</div></div><span class="mini" style="background:rgba(224,145,43,.18);color:#9a6410">配信中</span></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>LP・公式LINE・ロゴ</b> <span>確定・稼働</span></div></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>AB第一弾配信</b> <span>新MP・不合格属性へ配信済み</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>AB第二弾（9,670人）</b> <span>シナリオ確定・配信準備中。正確な送信数をスプレッドで報告</span></div></div>
+    </div>
+    <div class="st s4">
+      <div class="sh"><div class="g">供</div><div><h3>供給</h3><div class="sub">講師・録音・本入会</div></div><span class="mini" style="background:rgba(198,75,44,.14);color:var(--review)">要決定</span></div>
+      <div class="task"><span class="ck d">✓</span><div class="tx"><b>まさき講師アサイン</b> <span>オンライン・渋谷スタジオで実施中</span></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>本入会フロー確定</b> <span>フォーム送信→プラン選択→Stripe決済ページの3段で調整中</span></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>録音協力講師のピック</b> <span>大串さん経由で人選 → 打診 → 録音前提の契約へ</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec"><span class="no">6</span><h2>アタックリスト（配信対象マップ）</h2><span class="cap">窓口×リスト温度で整理。緑＝配信済／橙＝配信準備中／紫＝停止方向。</span></div>
+  <div class="atk">
+    <table>
+      <thead><tr><th>窓口</th><th>対象リスト</th><th>人数</th><th>施策</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr><td>旧MP</td><td>LUMINA0721発射（MP+登録が条件）</td><td class="big">2,500</td><td>LUMINA</td><td><span class="pill p-live">AB第二弾</span></td></tr>
+        <tr><td>旧MP</td><td>まねきクーポン（MP+配信用）</td><td class="big">3,627</td><td>まねき</td><td><span class="pill p-live">AB第二弾</span></td></tr>
+        <tr><td>新MP</td><td>南川さんリスト（7/13受領）</td><td class="big">3,543</td><td>まねき（全員）</td><td><span class="pill p-live">AB第二弾</span></td></tr>
+        <tr><td>旧MP</td><td>ナーチャリスト（第一弾）</td><td class="big">1,929</td><td>LUMINA</td><td><span class="pill p-sent">配信済</span></td></tr>
+        <tr><td>旧MP</td><td>不合格属性タグ保有</td><td class="big">255</td><td>LUMINA</td><td><span class="pill p-sent">配信済</span></td></tr>
+        <tr><td>旧MP</td><td>旧MP全体（BUMP施策）</td><td class="big">6,388</td><td>BUMP</td><td><span class="pill p-sent">配信済</span></td></tr>
+        <tr><td>VP窓口</td><td>ダウンセル後・反応なし</td><td class="big">310</td><td>LUMINA</td><td><span class="pill p-stop">停止方向</span></td></tr>
+        <tr><td>VP窓口</td><td>VPナーチャリスト</td><td class="big">3,481</td><td>まねき</td><td><span class="pill p-low">今回配信なし</span></td></tr>
+        <tr><td>MP+</td><td>MP+コンタクト</td><td class="big">約2,000</td><td>LUMINA</td><td><span class="pill p-low">優先度低・未定</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tsum"><span>まねき合計：<b>7,170人</b></span><span>LUMINA（MP+登録条件）：<b>2,500人</b></span><span>AB第一弾で配信済500人は除外済み</span></div>
+  </div>
+
+  <div class="sec"><span class="no">7</span><h2>進行中のアクション（Next Action）</h2><span class="cap">KPI直結の2軸を最優先に。運用の詰めが残タスクの中心。</span></div>
+  <div class="streams">
+    <div class="st s3">
+      <div class="sh"><div class="g" style="background:var(--coral)">1</div><div><h3>AB第二弾を撃ち切る</h3><div class="sub">集客ストリーム</div></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>9,670人へ配信</b> <span>シナリオ確定済・クリエイティブ準備の上で発射。2通目以降のシナリオは22時間後などに調整</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>正確な送信数をスプレッド報告</b> <span>岡部さん担当</span></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>KPIダッシュボード可視化</b> <span>予約・入会が見える状態へ</span></div></div>
+    </div>
+    <div class="st s4">
+      <div class="sh"><div class="g" style="background:var(--teal)">2</div><div><h3>本入会フローを固める</h3><div class="sub">供給／決済ストリーム</div></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>フォーム→プラン選択→Stripe</b> <span>3段設計で確定（伊藤さん提案）</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>特記事項の表記統一</b> <span>【渋谷】LUMINA体験／【オンライン】LUMINA で講師カレンダー統一</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>入会後ルールのFAQ化</b> <span>支払い・繰越・予約締切・講師変更などを営業資料に反映</span></div></div>
+    </div>
+  </div>
+
+  <div class="risk">
+    <h3>握っておきたい論点</h3>
+    <p><b>①「支払い登録しても受講開始が9月」問題</b>——7/11の学生さんが入会に踏み切れなかった要因。初月月謝の扱い・受講開始タイミングの見せ方が、入会率に直接効く。　<b>②MP+送客の計測</b>はまだ仕組み化されておらず中期宿題。　<b>③既存アカウント獲得ユニットとのカニバリ</b>——LUMINAが新規をボイトレに流すと、OL／イベント経由の獲得とKPIがぶつかりうる。</p>
+  </div>
+
+  <footer>
+    Studio LUMINA 事業ダッシュボード<br>
+    出典：Slack #proj-ボイトレ事業-studio-lumina のメッセージ・スレッド、および共有Google Drive（覚書・利用規約・重要事項表示・営業資料）。<br>
+    数値・ステータスは2026年7月21日時点の把握内容。実績（予約・入会）はSlack報告ベースで、確定集計はスプレッドで別途管理。
+  </footer>
+
+</div>
+</body>
+</html>
