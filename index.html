@@ -66,13 +66,30 @@
   .fstage .fl{font-size:12.5px;font-weight:700;opacity:.95}
   .fstage .fs{font-size:11px;font-weight:500;opacity:.85}
   .f1{background:linear-gradient(100deg,#3A5A9B,#4A6BB0);width:100%}
-  .f2{background:linear-gradient(100deg,#2E7D6F,#3a9384);width:82%}
-  .f3{background:linear-gradient(100deg,#C98A1E,#EF9F27);width:60%}
-  .f4{background:linear-gradient(100deg,#D9542A,#E56B3E);width:42%}
-  .f5{background:linear-gradient(100deg,#A83B18,#C64B2C);width:26%}
+  .f2{background:linear-gradient(100deg,#2E7D6F,#3a9384);width:74%}
+  .f3{background:linear-gradient(100deg,#C98A1E,#EF9F27);width:62%}
+  .f4{background:linear-gradient(100deg,#D9542A,#E56B3E);width:48%}
+  .f5{background:linear-gradient(100deg,#A83B18,#C64B2C);width:30%}
+  .f6{background:linear-gradient(100deg,#6b6f76,#8a8f98);width:18%}
   .farrow{font-size:14px;color:var(--ink2);opacity:.5;margin:-2px 0 4px}
   .fnote{margin-top:10px;background:var(--paper2);border-radius:12px;padding:12px 16px;font-size:12px;color:var(--ink2);text-align:center;line-height:1.7}
   .fnote b{color:var(--ink)}
+
+  /* グラフ */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  @media(max-width:820px){.charts{grid-template-columns:1fr}}
+  .chart{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--glow)}
+  .chart h3{font-size:14px;font-weight:800;margin-bottom:2px}
+  .chart .csub{font-size:11.5px;color:var(--ink2);margin-bottom:12px}
+  .chart svg{width:100%;height:auto;display:block;overflow:visible}
+  .chart.wide{grid-column:1 / -1}
+  .barrow{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:12px}
+  .barrow .bl{flex:none;width:150px;color:var(--ink);font-weight:600}
+  .barrow .bt{flex:1;background:var(--paper2);border-radius:7px;height:26px;position:relative;overflow:hidden}
+  .barrow .bf{height:100%;border-radius:7px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;color:#fff;font-weight:800;font-size:12px;min-width:34px}
+  .barrow .bpct{flex:none;width:52px;text-align:right;font-size:11px;color:var(--ink2);font-weight:600}
+  .clegend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--ink2);margin-top:10px}
+  .clegend i{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:5px}
 
   .flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
   @media(max-width:820px){.flow{grid-template-columns:1fr}}
@@ -162,19 +179,19 @@
     <div class="kicker">事業ダッシュボード ／ 全体まとめ</div>
     <h1 class="title">「歌うこと」が、あなたの毎日を照らす。</h1>
     <p class="lede">月謝制ボイストレーニング事業「Studio LUMINA」の、これまでの実績・進行中の施策・全体構造を1枚に。チーム全体の目線合わせ用。</p>
-    <div class="asof">出典：Slack #proj-ボイトレ事業-studio-lumina ／ 共有Drive　・　集計基準：2026年7月21日時点</div>
+    <div class="asof">出典：Slack #proj-ボイトレ事業-studio-lumina ／ 共有Drive「LUMINA顧客管理」スプレッド　・　集計基準：2026年7月22日時点</div>
   </header>
 
   <div class="verdict">
     <div class="vh">サマリー</div>
-    <p>LUMINAは<b>「設計」から「稼働」フェーズ</b>に移行済み。7/10に初の無料体験レッスンがスタートし、以降<b>体験レッスンの予約・実施が継続的に発生</b>、うち<b>学生1名が入会検討</b>まで到達している。7/21時点の主要な進行施策は2つ——<b>①既存リスト計9,670人への大量配信（AB第二弾）</b>と、<b>②本入会フロー（フォーム→プラン選択→Stripe決済）の確定</b>。いずれもKPI（＝MP+送客／入会）に直結するため優先度は最上位。</p>
+    <p>LUMINAは<b>「設計」から「稼働」フェーズ</b>に移行済み。顧客管理スプレッドの実データでは、<b>LINE登録294人・フォーム同意59件・体験予約36名（実施済み10件）</b>まで進行。本入会は本入会フロー（フォーム→プラン選択→Stripe決済）稼働前のため0件で、ここが最大のボトルネック。7/22時点の主要な進行施策は2つ——<b>①LUMINA体験に直結するMP+登録条件リスト2,500人への配信（AB第二弾）</b>と、<b>②本入会フローの確定</b>。同時配信のまねきクーポン枠7,170人はLUMINAへ直接コンバージョンしない別導線のため、LUMINAの母数からは分離して扱う。</p>
   </div>
 
   <div class="kpis">
-    <div class="kpi c1"><div class="n">7/10</div><div class="l">初の無料体験スタート</div><div class="s">初日2件の予約から立ち上がり</div></div>
-    <div class="kpi c2"><div class="n">2<small>名</small></div><div class="l">初回体験レッスン実施済み</div><div class="s">7/11実施・MP不合格属性</div></div>
-    <div class="kpi c3"><div class="n">1<small>名</small></div><div class="l">入会検討まで到達</div><div class="s">学生・支払い開始時期がネック</div></div>
-    <div class="kpi c4"><div class="n">9,670<small>人</small></div><div class="l">AB第二弾の配信母数</div><div class="s">まねき7,170＋LUMINA枠2,500</div></div>
+    <div class="kpi c1"><div class="n">294<small>人</small></div><div class="l">LINE公式登録者</div><div class="s">6/10〜7/21で積み上がり</div></div>
+    <div class="kpi c2"><div class="n">59<small>件</small></div><div class="l">無料体験フォーム同意</div><div class="s">台帳化確実は41件</div></div>
+    <div class="kpi c3"><div class="n">36<small>名</small></div><div class="l">体験予約（実人数）</div><div class="s">のべ37件・実施済み10件</div></div>
+    <div class="kpi c4"><div class="n">0<small>件</small></div><div class="l">本入会</div><div class="s">本入会フロー稼働前</div></div>
   </div>
   <div class="legend">
     <span><i style="background:var(--done)"></i>完了・稼働中</span>
@@ -182,24 +199,100 @@
     <span><i style="background:var(--review)"></i>意思決定が必要</span>
   </div>
 
-  <div class="sec"><span class="no">1</span><h2>コンバージョンファネル</h2><span class="cap">配信 → LINE登録 → 体験予約 → 体験実施 → 入会。上流の母数と下流の実数を1本で。</span></div>
+  <div class="sec"><span class="no">1</span><h2>コンバージョンファネル（実数）</h2><span class="cap">LINE登録 → 反応 → 同意 → 予約 → 実施 → 入会。顧客管理スプレッドの実データ。</span></div>
   <div class="funnel">
-    <div class="fstage f1"><div class="inner"><div class="fn">9,670人</div><div class="fl">① 配信対象（AB第二弾）</div><div class="fs">まねき7,170＋LUMINA枠2,500・既存リストへLINE配信</div></div></div>
-    <div class="farrow">▼</div>
-    <div class="fstage f2"><div class="inner"><div class="fn">継続流入</div><div class="fl">② LINE登録 / 無料体験フォーム同意</div><div class="fs">7/8以降、同意フォーム回答が連日着信</div></div></div>
-    <div class="farrow">▼</div>
-    <div class="fstage f3"><div class="inner"><div class="fn">継続発生</div><div class="fl">③ 無料体験レッスン予約</div><div class="fs">7/10初日2件を皮切りに予約が積み上がり</div></div></div>
-    <div class="farrow">▼</div>
-    <div class="fstage f4"><div class="inner"><div class="fn">2名</div><div class="fl">④ 無料体験レッスン実施</div><div class="fs">7/11実施・SP・リスケなく完了</div></div></div>
-    <div class="farrow">▼</div>
-    <div class="fstage f5"><div class="inner"><div class="fn">1名</div><div class="fl">⑤ 入会検討</div><div class="fs">学生1名・受講開始時期がネックで保留</div></div></div>
+    <div class="fstage f1"><div class="inner"><div class="fn">294人</div><div class="fl">① LINE公式登録</div><div class="fs">6/10〜7/21で積み上がり・全体の母集団</div></div></div>
+    <div class="farrow">▼ <span style="font-size:11px;opacity:.7">反応率 24%</span></div>
+    <div class="fstage f2"><div class="inner"><div class="fn">70人</div><div class="fl">② LINEで反応（返信）</div><div class="fs">受信メッセージ186通・70ユーザーが返信</div></div></div>
+    <div class="farrow">▼ <span style="font-size:11px;opacity:.7">登録比 20%</span></div>
+    <div class="fstage f3"><div class="inner"><div class="fn">59件</div><div class="fl">③ 無料体験フォーム同意</div><div class="fs">台帳化が確実なのは41件（受け口2系統の差）</div></div></div>
+    <div class="farrow">▼ <span style="font-size:11px;opacity:.7">同意→予約 61%</span></div>
+    <div class="fstage f4"><div class="inner"><div class="fn">36名</div><div class="fl">④ 無料体験レッスン予約</div><div class="fs">のべ37件・実人数36名（TimeRex等で日程確定）</div></div></div>
+    <div class="farrow">▼ <span style="font-size:11px;opacity:.7">予約→実施 28%</span></div>
+    <div class="fstage f5"><div class="inner"><div class="fn">10件</div><div class="fl">⑤ 無料体験レッスン実施</div><div class="fs">予約日が7/22より前＝実施済み想定。残27件は今後予約</div></div></div>
+    <div class="farrow">▼ <span style="font-size:11px;opacity:.7">実施→入会 0%</span></div>
+    <div class="fstage f6"><div class="inner"><div class="fn">0件</div><div class="fl">⑥ 本入会</div><div class="fs">入会規約同意0件・本入会フロー稼働前</div></div></div>
   </div>
   <div class="fnote">
-    <b>上流（①②③）</b>は母数が大きく、AB第二弾でさらに厚くなる見込み。<b>下流（④⑤）</b>はまだ実数が小さく、体験→入会の転換設計が伸びしろ。<br>
-    ※予約・実施・入会の確定集計はスプレッドで別管理。本図の下流実数は7/11実施分に基づく把握値。
+    <b>全体像：</b>LINE登録294人を母集団に、同意59件 → 予約36名 → 実施済み10件まで進行。入会は本入会フロー（フォーム→プラン選択→Stripe）稼働前のため0件。<br>
+    <b>⚠ 注意点：</b>③同意はフォーム受け口が2系統（自社製フォーム＝台帳41件／Googleフォーム＝回答59件）あり、7/19に取りこぼしの指摘あり。59が上限・41が確実の幅で見る。⑤実施済みは体験日程が7/22より前の予約を集計した想定値（時刻はUTC格納の可能性があり±数件の幅）。
   </div>
 
-  <div class="sec"><span class="no">2</span><h2>事業の全体像</h2><span class="cap">顧客・アプラ・講師の三者。アプラは「場」を提供する仲介者。</span></div>
+  <div class="sec"><span class="no">2</span><h2>数字で見るファネル</h2><span class="cap">スプレッド実データの可視化。転換率・登録の伸び・予約の分布。</span></div>
+  <div class="charts">
+
+    <div class="chart">
+      <h3>ファネル各段の実数と転換率</h3>
+      <div class="csub">LINE登録を100%とした各段の到達率</div>
+      <div class="barrow"><div class="bl">① LINE登録</div><div class="bt"><div class="bf" style="width:100%;background:#3A5A9B">294</div></div><div class="bpct">100%</div></div>
+      <div class="barrow"><div class="bl">② 反応（返信）</div><div class="bt"><div class="bf" style="width:24%;background:#2E7D6F">70</div></div><div class="bpct">24%</div></div>
+      <div class="barrow"><div class="bl">③ フォーム同意</div><div class="bt"><div class="bf" style="width:20%;background:#C98A1E">59</div></div><div class="bpct">20%</div></div>
+      <div class="barrow"><div class="bl">④ 体験予約（実人数）</div><div class="bt"><div class="bf" style="width:12.2%;background:#D9542A">36</div></div><div class="bpct">12%</div></div>
+      <div class="barrow"><div class="bl">⑤ 体験実施（済）</div><div class="bt"><div class="bf" style="width:3.4%;background:#A83B18;min-width:28px">10</div></div><div class="bpct">3.4%</div></div>
+      <div class="barrow"><div class="bl">⑥ 本入会</div><div class="bt"><div class="bf" style="width:2%;background:#8a8f98;min-width:22px">0</div></div><div class="bpct">0%</div></div>
+    </div>
+
+    <div class="chart">
+      <h3>体験予約の日別分布</h3>
+      <div class="csub">予約された体験日ベース・実施済み／今後で色分け（のべ37件）</div>
+      <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
+        <!-- y軸目盛 -->
+        <line x1="26" y1="150" x2="620" y2="150" stroke="#E4D8C4" stroke-width="1"/>
+        <text x="20" y="20" font-size="9" fill="#5C4A3A" text-anchor="end">7</text>
+        <text x="20" y="88" font-size="9" fill="#5C4A3A" text-anchor="end">3.5</text>
+        <text x="20" y="153" font-size="9" fill="#5C4A3A" text-anchor="end">0</text>
+        <!-- バー: 19日分, 実施済み(coral-d) / 今後(amber) -->
+        <!-- スケール: 最大7 → 130px, barW=26, gap=4 -->
+        <g font-size="8" fill="#5C4A3A" text-anchor="middle">
+        <!-- past -->
+        <rect x="28" y="113" width="24" height="37" fill="#A83B18" rx="2"/><text x="40" y="163">7/11</text>
+        <rect x="58" y="132" width="24" height="18" fill="#A83B18" rx="2"/><text x="70" y="163">7/13</text>
+        <rect x="88" y="132" width="24" height="18" fill="#A83B18" rx="2"/><text x="100" y="163">7/18</text>
+        <rect x="118" y="113" width="24" height="37" fill="#A83B18" rx="2"/><text x="130" y="163">7/19</text>
+        <rect x="148" y="113" width="24" height="37" fill="#A83B18" rx="2"/><text x="160" y="163">7/20</text>
+        <rect x="178" y="113" width="24" height="37" fill="#A83B18" rx="2"/><text x="190" y="163">7/21</text>
+        <!-- future -->
+        <rect x="208" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="220" y="163">7/23</text>
+        <rect x="238" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="250" y="163">7/25</text>
+        <rect x="268" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="280" y="163">7/26</text>
+        <rect x="298" y="113" width="24" height="37" fill="#EF9F27" rx="2"/><text x="310" y="163">7/27</text>
+        <rect x="328" y="94" width="24" height="56" fill="#EF9F27" rx="2"/><text x="340" y="163">7/28</text>
+        <rect x="358" y="20" width="24" height="130" fill="#EF9F27" rx="2"/><text x="370" y="163">8/1</text>
+        <rect x="388" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="400" y="163">8/2</text>
+        <rect x="418" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="430" y="163">8/3</text>
+        <rect x="448" y="94" width="24" height="56" fill="#EF9F27" rx="2"/><text x="460" y="163">8/6</text>
+        <rect x="478" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="490" y="163">8/7</text>
+        <rect x="508" y="113" width="24" height="37" fill="#EF9F27" rx="2"/><text x="520" y="163">8/8</text>
+        <rect x="538" y="94" width="24" height="56" fill="#EF9F27" rx="2"/><text x="550" y="163">8/9</text>
+        <rect x="568" y="132" width="24" height="18" fill="#EF9F27" rx="2"/><text x="580" y="163">8/10</text>
+        </g>
+      </svg>
+      <div class="clegend"><span><i style="background:#A83B18"></i>実施済み（7/22より前）10件</span><span><i style="background:#EF9F27"></i>今後の予約 27件</span></div>
+    </div>
+
+    <div class="chart wide">
+      <h3>LINE公式登録の累積推移</h3>
+      <div class="csub">6/10〜7/21・配信のあった期間（6/15前後、6/24〜30）に集中して伸長 → 累積293人</div>
+      <svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:160px">
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3A5A9B" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#3A5A9B" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <path d="M 8.0,141.1 L 22.7,141.1 L 37.5,141.1 L 52.2,140.6 L 66.9,140.2 L 81.7,124.4 L 96.4,115.0 L 111.1,108.7 L 125.9,102.4 L 140.6,99.7 L 155.3,99.7 L 170.0,98.8 L 184.8,98.8 L 199.5,97.4 L 214.2,82.1 L 229.0,70.8 L 243.7,69.5 L 258.4,54.6 L 273.2,44.2 L 287.9,34.3 L 302.6,24.4 L 317.4,19.9 L 332.1,19.0 L 346.8,18.6 L 361.6,18.6 L 376.3,18.6 L 391.0,18.1 L 405.8,17.2 L 420.5,16.8 L 435.2,16.8 L 450.0,15.9 L 464.7,15.9 L 479.4,15.0 L 494.1,15.0 L 508.9,14.5 L 523.6,13.2 L 538.3,12.7 L 553.1,11.8 L 567.8,10.9 L 582.5,10.5 L 597.3,10.5 L 612.0,10.0 L 612.0,142.0 L 8.0,142.0 Z" fill="url(#areaGrad)"/>
+        <path d="M 8.0,141.1 L 22.7,141.1 L 37.5,141.1 L 52.2,140.6 L 66.9,140.2 L 81.7,124.4 L 96.4,115.0 L 111.1,108.7 L 125.9,102.4 L 140.6,99.7 L 155.3,99.7 L 170.0,98.8 L 184.8,98.8 L 199.5,97.4 L 214.2,82.1 L 229.0,70.8 L 243.7,69.5 L 258.4,54.6 L 273.2,44.2 L 287.9,34.3 L 302.6,24.4 L 317.4,19.9 L 332.1,19.0 L 346.8,18.6 L 361.6,18.6 L 376.3,18.6 L 391.0,18.1 L 405.8,17.2 L 420.5,16.8 L 435.2,16.8 L 450.0,15.9 L 464.7,15.9 L 479.4,15.0 L 494.1,15.0 L 508.9,14.5 L 523.6,13.2 L 538.3,12.7 L 553.1,11.8 L 567.8,10.9 L 582.5,10.5 L 597.3,10.5 L 612.0,10.0" fill="none" stroke="#3A5A9B" stroke-width="2"/>
+        <circle cx="81.7" cy="124.4" r="3" fill="#3A5A9B"/><text x="81.7" y="118" font-size="8.5" fill="#3A5A9B" text-anchor="middle">6/15</text>
+        <circle cx="214.2" cy="82.1" r="3" fill="#D9542A"/><text x="214.2" y="76" font-size="8.5" fill="#D9542A" text-anchor="middle">6/24 133</text>
+        <circle cx="302.6" cy="24.4" r="3" fill="#D9542A"/><text x="302.6" y="18" font-size="8.5" fill="#D9542A" text-anchor="middle">6/30 261</text>
+        <circle cx="612.0" cy="10.0" r="3.5" fill="#20130A"/><text x="600" y="9" font-size="9" fill="#20130A" text-anchor="end" font-weight="bold">293</text>
+      </svg>
+      <div class="clegend"><span>青線＝累積登録数</span><span>配信タイミング（6/15・6/24・6/30）で段階的にジャンプ</span></div>
+    </div>
+
+  </div>
+
+  <div class="sec"><span class="no">3</span><h2>事業の全体像</h2><span class="cap">顧客・アプラ・講師の三者。アプラは「場」を提供する仲介者。</span></div>
   <div class="flow">
     <div class="fcard a">
       <div class="ic">🎤</div><div class="role">顧客 / 受講者</div>
@@ -222,34 +315,34 @@
   </div>
   <div class="moneyflow">お金の流れ：<b>顧客 → アプラ → 講師</b>　／　サービスの流れ：<b>講師 → 顧客（マンツーマンレッスン）</b></div>
 
-  <div class="sec"><span class="no">3</span><h2>アタック〜稼働の実績</h2><span class="cap">6月に設計、7/10に初稼働。以降レッスンが継続的に発生している。</span></div>
+  <div class="sec"><span class="no">4</span><h2>アタック〜稼働の実績</h2><span class="cap">6月に設計、7/10に初稼働。以降レッスンが継続的に発生している。</span></div>
   <div class="tl">
     <div class="ev done"><div class="d">6月上旬</div><h4>事業発足・サービス名確定<span class="badge b-done">完了</span></h4><p>アカウント獲得ユニットの課題（新規が使ってくれない）から着想。名称は「Studio LUMINA」に確定。目的＝MP+送客・経済圏拡張で全員合意。</p></div>
     <div class="ev done"><div class="d">6月中旬</div><h4>4書類の作成・リーガルチェック<span class="badge b-done">完了</span></h4><p>覚書・利用規約・重要事項表示・カバーレターを整備。特商法（通信販売該当）、報酬固定額明示、労働者性、クーリングオフ論点まで第2ラウンド反映済み。</p></div>
     <div class="ev done"><div class="d">6/16〜6/24</div><h4>LINE一斉配信スタート（AB第一弾）<span class="badge b-done">完了</span></h4><p>新MP LINE 1,929人／不合格属性255人へ配信＆シナリオ再開。旧MP 6,388人にはBUMP施策も併走。</p></div>
     <div class="ev done"><div class="d">7/10</div><h4>プロジェクト開始以来 初の無料体験レッスン<span class="badge b-done">完了</span></h4><p>初日で2件の予約。以降フォーム同意（＝申込）が連日着信し、予約が積み上がる状態に。</p></div>
-    <div class="ev done"><div class="d">7/11</div><h4>初回体験2名を実施 → 学生1名が入会検討<span class="badge b-done">完了</span></h4><p>2名ともMP不合格属性（休職中・学生）。学生の方が入会検討中。「支払い登録しても受講開始が9月」という点が引っかかり、その場入会に至らず → 運用改善へ。</p></div>
+    <div class="ev done"><div class="d">7/11〜</div><h4>体験実施が進行（実施済み10件）→ 学生1名が入会検討<span class="badge b-done">完了</span></h4><p>7/11の2名（鳥越・小林）を皮切りに、7/22時点で予約日を過ぎた実施済みは10件。初期の2名はMP不合格属性で、学生が入会検討中も「支払い登録しても受講開始が先」という点が引っかかり入会に至らず → 運用改善へ。予約は実人数36名まで積み上がり、今後の予約27件が控える。</p></div>
     <div class="ev prog"><div class="d">7/13〜7/21</div><h4>入会後ルール整備・営業資料・FAQ整備<span class="badge b-prog">進行中</span></h4><p>まさき講師と会話し、繰越・予約締切・支払いルール等をFAQ化。講師がシアーの営業資料を提供。共有Driveも構築。特記事項の表記統一（対面／オンライン）も実施。</p></div>
-    <div class="ev prog"><div class="d">7/21</div><h4>AB第二弾のシナリオ確定・配信準備<span class="badge b-prog">進行中</span></h4><p>旧MPを軸に配信対象を確定（まねき7,170人／MP+登録条件のLUMINA 2,500人、新MP 3,543人は全員まねき枠、VP窓口は今回配信なし）。シナリオ完成済み、クリエイティブ準備の上で発射予定。</p></div>
+    <div class="ev prog"><div class="d">7/21</div><h4>AB第二弾のシナリオ確定・配信準備<span class="badge b-prog">進行中</span></h4><p>配信対象を確定。LUMINAへ直結するのはMP+登録条件のLUMINA枠2,500人で、これがLUMINAの母数。まねきクーポン枠7,170人（旧MP 3,627＋新MP 3,543）は同時に撃つが別導線でLUMINA母数外。VP窓口は今回配信なし。シナリオ完成済み、クリエイティブ準備の上で発射予定。</p></div>
   </div>
 
-  <div class="sec"><span class="no">4</span><h2>AB第二弾の配信設計</h2><span class="cap">旧MP・新MP計9,670人を、2つの訴求で検証。VP窓口は今回配信なし。</span></div>
+  <div class="sec"><span class="no">5</span><h2>AB第二弾の配信設計</h2><span class="cap">同時に2導線を配信。ただしLUMINAの母数はA枠のみ。B枠は別KPIの導線。</span></div>
   <div class="ab">
     <div class="abx x1">
-      <span class="tag">A ／ LUMINA枠</span>
+      <span class="tag">A ／ LUMINA枠 ＝ LUMINA母数</span>
       <h3>MP+アカウント登録が無料体験の条件</h3>
       <div class="num">2,500人</div>
-      <p>旧MPの「LUMINA0721発射リスト（MP+登録が条件）」タグ保有者へ。LUMINAアタックとして配信。MP+登録を挟むことで送客導線を検証。</p>
+      <p>旧MPの「LUMINA0721発射リスト（MP+登録が条件）」タグ保有者へ。LUMINAアタックとして配信。<b>LUMINAのファネル母数はこの2,500人。</b></p>
     </div>
     <div class="abx x2">
-      <span class="tag">B ／ まねきクーポン枠</span>
+      <span class="tag">B ／ まねきクーポン枠（LUMINA母数外）</span>
       <h3>アカウント登録の上でOL視聴 → まねきクーポン</h3>
       <div class="num">7,170人</div>
-      <p>旧MP 3,627人＋新MP 3,543人（AB第一弾で配信済の500人は除外）。まねきクーポンMP+配信用として配信。</p>
+      <p>旧MP 3,627人＋新MP 3,543人（AB第一弾で配信済の500人は除外）。<b>LUMINAへは直接コンバージョンしない別導線</b>のため、LUMINA母数には含めない。</p>
     </div>
   </div>
 
-  <div class="sec"><span class="no">5</span><h2>4ストリームの進捗</h2><span class="cap">商品・契約・集客・供給。左上ほど固まり、右下ほど運用の詰め。</span></div>
+  <div class="sec"><span class="no">6</span><h2>4ストリームの進捗</h2><span class="cap">商品・契約・集客・供給。左上ほど固まり、右下ほど運用の詰め。</span></div>
   <div class="streams">
     <div class="st s1">
       <div class="sh"><div class="g">商</div><div><h3>商品</h3><div class="sub">プラン・価格・特典</div></div><span class="mini" style="background:rgba(92,154,84,.16);color:var(--done)">確定</span></div>
@@ -267,17 +360,18 @@
       <div class="sh"><div class="g">集</div><div><h3>集客</h3><div class="sub">LP・リスト・配信</div></div><span class="mini" style="background:rgba(224,145,43,.18);color:#9a6410">配信中</span></div>
       <div class="task"><span class="ck d">✓</span><div class="tx"><b>LP・公式LINE・ロゴ</b> <span>確定・稼働</span></div></div>
       <div class="task"><span class="ck d">✓</span><div class="tx"><b>AB第一弾配信</b> <span>新MP・不合格属性へ配信済み</span></div></div>
-      <div class="task"><span class="ck w">!</span><div class="tx"><b>AB第二弾（9,670人）</b> <span>シナリオ確定・配信準備中。正確な送信数をスプレッドで報告</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>AB第二弾（LUMINA枠2,500＋まねき7,170）</b> <span>シナリオ確定・配信準備中。母数はLUMINA枠2,500人、正確な送信数をスプレッドで報告</span></div></div>
     </div>
     <div class="st s4">
       <div class="sh"><div class="g">供</div><div><h3>供給</h3><div class="sub">講師・録音・本入会</div></div><span class="mini" style="background:rgba(198,75,44,.14);color:var(--review)">要決定</span></div>
       <div class="task"><span class="ck d">✓</span><div class="tx"><b>まさき講師アサイン</b> <span>オンライン・渋谷スタジオで実施中</span></div></div>
       <div class="task"><span class="ck r">◻</span><div class="tx"><b>本入会フロー確定</b> <span>フォーム送信→プラン選択→Stripe決済ページの3段で調整中</span></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>レッスン実施の計測</b> <span>予約は取れるが実施が未計測。講師の報告ワークフロー整備が未着手</span></div></div>
       <div class="task"><span class="ck r">◻</span><div class="tx"><b>録音協力講師のピック</b> <span>大串さん経由で人選 → 打診 → 録音前提の契約へ</span></div></div>
     </div>
   </div>
 
-  <div class="sec"><span class="no">6</span><h2>アタックリスト（配信対象マップ）</h2><span class="cap">窓口×リスト温度で整理。緑＝配信済／橙＝配信準備中／紫＝停止方向。</span></div>
+  <div class="sec"><span class="no">7</span><h2>アタックリスト（配信対象マップ）</h2><span class="cap">窓口×リスト温度で整理。緑＝配信済／橙＝配信準備中／紫＝停止方向。</span></div>
   <div class="atk">
     <table>
       <thead><tr><th>窓口</th><th>対象リスト</th><th>人数</th><th>施策</th><th>状態</th></tr></thead>
@@ -293,16 +387,16 @@
         <tr><td>MP+</td><td>MP+コンタクト</td><td class="big">約2,000</td><td>LUMINA</td><td><span class="pill p-low">優先度低・未定</span></td></tr>
       </tbody>
     </table>
-    <div class="tsum"><span>まねき合計：<b>7,170人</b></span><span>LUMINA（MP+登録条件）：<b>2,500人</b></span><span>AB第一弾で配信済500人は除外済み</span></div>
+    <div class="tsum"><span>LUMINA母数（MP+登録条件）：<b>2,500人</b></span><span>まねき合計（LUMINA母数外）：<b>7,170人</b></span><span>AB第一弾で配信済500人は除外済み</span></div>
   </div>
 
-  <div class="sec"><span class="no">7</span><h2>進行中のアクション（Next Action）</h2><span class="cap">KPI直結の2軸を最優先に。運用の詰めが残タスクの中心。</span></div>
+  <div class="sec"><span class="no">8</span><h2>進行中のアクション（Next Action）</h2><span class="cap">KPI直結の2軸を最優先に。運用の詰めが残タスクの中心。</span></div>
   <div class="streams">
     <div class="st s3">
       <div class="sh"><div class="g" style="background:var(--coral)">1</div><div><h3>AB第二弾を撃ち切る</h3><div class="sub">集客ストリーム</div></div></div>
-      <div class="task"><span class="ck w">!</span><div class="tx"><b>9,670人へ配信</b> <span>シナリオ確定済・クリエイティブ準備の上で発射。2通目以降のシナリオは22時間後などに調整</span></div></div>
+      <div class="task"><span class="ck w">!</span><div class="tx"><b>配信（LUMINA枠2,500／まねき7,170）</b> <span>シナリオ確定済・クリエイティブ準備の上で発射。母数はLUMINA枠2,500人</span></div></div>
       <div class="task"><span class="ck w">!</span><div class="tx"><b>正確な送信数をスプレッド報告</b> <span>岡部さん担当</span></div></div>
-      <div class="task"><span class="ck r">◻</span><div class="tx"><b>KPIダッシュボード可視化</b> <span>予約・入会が見える状態へ</span></div></div>
+      <div class="task"><span class="ck r">◻</span><div class="tx"><b>実施のリアルタイム計測</b> <span>予約確定WFに「実施」ボタンを付ける等で、このダッシュボードへ反映（定例の定点観測へ）</span></div></div>
     </div>
     <div class="st s4">
       <div class="sh"><div class="g" style="background:var(--teal)">2</div><div><h3>本入会フローを固める</h3><div class="sub">供給／決済ストリーム</div></div></div>
@@ -314,13 +408,13 @@
 
   <div class="risk">
     <h3>握っておきたい論点</h3>
-    <p><b>①「支払い登録しても受講開始が9月」問題</b>——7/11の学生さんが入会に踏み切れなかった要因。初月月謝の扱い・受講開始タイミングの見せ方が、入会率に直接効く。　<b>②MP+送客の計測</b>はまだ仕組み化されておらず中期宿題。　<b>③既存アカウント獲得ユニットとのカニバリ</b>——LUMINAが新規をボイトレに流すと、OL／イベント経由の獲得とKPIがぶつかりうる。</p>
+    <p><b>①予約→実施→入会の転換</b>——予約36名に対し実施済みは10件（予約→実施28%）、本入会は0件。同意59→予約36は61%と健全だが、下流の実施定着と本入会フロー稼働が最大のボトルネック。なお実施はスプレッド上の体験日程から集計できるが、講師の実施報告ワークフローが未整備で、確定には人力確認が残る。　<b>②「支払い登録しても受講開始が先」問題</b>——学生が入会に踏み切れなかった要因。初月月謝の扱い・受講開始タイミングの見せ方が入会率に直接効く。　<b>③フォーム同意の二重管理</b>——自社製フォーム（台帳41件）とGoogleフォーム（回答59件）で受け口が2系統。取りこぼしの指摘もあり、計測の一本化が必要。　<b>④MP+送客の計測</b>は仕組み化されておらず中期宿題。　<b>⑤既存アカウント獲得ユニットとのカニバリ</b>。</p>
   </div>
 
   <footer>
     Studio LUMINA 事業ダッシュボード<br>
     出典：Slack #proj-ボイトレ事業-studio-lumina のメッセージ・スレッド、および共有Google Drive（覚書・利用規約・重要事項表示・営業資料）。<br>
-    数値・ステータスは2026年7月21日時点の把握内容。実績（予約・入会）はSlack報告ベースで、確定集計はスプレッドで別途管理。
+    数値・ステータスは2026年7月22日時点。ファネル実数（LINE登録・同意・予約・実施）は共有Drive「LUMINA顧客管理」スプレッドの実データを集計。実施済み件数は体験日程が基準日より前の予約を数えた想定値（時刻はUTC格納の可能性があり±数件の幅）。同意はフォーム受け口2系統で41〜59件の幅。
   </footer>
 
 </div>
