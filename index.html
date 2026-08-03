@@ -149,6 +149,18 @@
   .cvrov .ovn{font-size:22px;font-weight:800}
   .cvrov.o1 .ovn{color:var(--coral)} .cvrov.o2 .ovn{color:var(--teal)}
   .cvrov .ovl{font-size:11px;color:var(--ink2);margin-top:3px}
+
+  /* 算出根拠テーブル */
+  .srcwrap{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--glow);overflow-x:auto}
+  .srctable{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+  .srctable th{text-align:left;padding:9px 12px;background:var(--paper2);color:var(--ink2);font-weight:700;font-size:11.5px;border-bottom:2px solid var(--line);white-space:nowrap}
+  .srctable td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+  .srctable tr:last-child td{border-bottom:none}
+  .srctable .snum{font-weight:800;font-size:15px;color:var(--coral);white-space:nowrap}
+  .srctable .smetric{font-weight:700;color:var(--ink);white-space:nowrap}
+  .srctable .ssheet{font-family:ui-monospace,monospace;font-size:11px;background:var(--paper);padding:1px 6px;border-radius:5px;color:var(--indigo);white-space:nowrap}
+  .srctable .scond{color:var(--ink2);font-size:11.5px}
+  .srcnote{font-size:11px;color:var(--ink2);margin-top:12px;line-height:1.6;padding-top:12px;border-top:1px dashed var(--line)}
   .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
   @media(max-width:820px){.charts{grid-template-columns:1fr}}
   .chart{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--glow)}
@@ -294,7 +306,29 @@
     <span><i style="background:var(--review)"></i>意思決定が必要</span>
   </div>
 
-  <div class="sec"><span class="no">1</span><h2>上流ファネル：アタック → LINE登録</h2><span class="cap">配信対象リスト → LINE公式登録まで。配信はSlack報告、登録はスプレッド実数。</span></div>
+  <div class="sec"><span class="no">1</span><h2>数字の算出根拠</h2><span class="cap">全数字は「LUMINA顧客管理」スプレッドが出所。どのシート・列・条件で出したかを明示。</span></div>
+  <div class="srcwrap">
+    <table class="srctable">
+      <thead><tr><th>数字</th><th>指標</th><th>参照シート</th><th>算出条件</th></tr></thead>
+      <tbody>
+        <tr><td class="snum">359</td><td class="smetric">LINE公式登録</td><td><span class="ssheet">ボイトレ顧客管理</span></td><td class="scond">LINEUserId[列A]が非空の行数（＝台帳の全行）</td></tr>
+        <tr><td class="snum">72</td><td class="smetric">無料体験 規約同意</td><td><span class="ssheet">ボイトレ顧客管理</span></td><td class="scond">同意[列H]="True" の行数。別途「重要事項同意」シートも受け口で、台帳化が確実なのは61件</td></tr>
+        <tr><td class="snum">45</td><td class="smetric">体験予約（実人数）</td><td><span class="ssheet">ボイトレ顧客管理</span></td><td class="scond">体験日程[列P]が日付として入っている行数</td></tr>
+        <tr><td class="snum">29</td><td class="smetric">体験実施（済）</td><td><span class="ssheet">ボイトレ顧客管理</span></td><td class="scond">体験日程[列P] ≤ 2026/8/3（基準日）の行数。日程経過＝実施とみなした値</td></tr>
+        <tr><td class="snum">16</td><td class="smetric">今後の体験予約</td><td><span class="ssheet">ボイトレ顧客管理</span></td><td class="scond">体験日程[列P] > 2026/8/3 の行数</td></tr>
+        <tr><td class="snum">2</td><td class="smetric">入会規約 同意</td><td><span class="ssheet">入会規約同意</span></td><td class="scond">同意[列C]="True" の行数（野間さん8/1・伊藤さん8/2）。うちUUID付与済みは1件</td></tr>
+        <tr><td class="snum">1</td><td class="smetric">本入会（決済完了）</td><td><span class="ssheet">Slack報告</span></td><td class="scond">伊藤亮太さん・月2回プランで決済完了。顧客管理のクレカ登録[列Z]・入会プラン[列AA]は反映待ち</td></tr>
+        <tr><td class="snum">70</td><td class="smetric">LINEで反応（返信）</td><td><span class="ssheet">LINE受信メッセージ一覧</span></td><td class="scond">返信のあったユニークユーザー数（Slack共有の集計値）</td></tr>
+        <tr><td class="snum">124/54<br>/8/3</td><td class="smetric">ルートB 各段<br>（MP+登録必須）</td><td><span class="ssheet">LUMINAアタック数値</span></td><td class="scond">タップ/登録/同意/日程確定。旧MP LUMINA0721発射リスト2,500人の行</td></tr>
+        <tr><td class="snum">531/302<br>/33/25</td><td class="smetric">ルートA 各段<br>（MP+登録不要）</td><td><span class="ssheet">LUMINAアタック数値</span></td><td class="scond">新MP＋VP 5,221人。7/29に岡部さんが確定版として整理・共有した数値</td></tr>
+      </tbody>
+    </table>
+    <div class="srcnote">
+      <b>集計基準日：2026年8月3日</b>。上記のうち「体験実施29」は体験日程が基準日を過ぎた予約を実施とみなした値で、無断キャンセル等を除いた<b>確定実施は「体験完了」列[列R]がTrueになって初めて確定</b>する（現在は日程経過分27件がFalseで実施報告待ち）。配信対象者数（上流ファネルの母数）だけはスプレッドではなくSlackの配信報告が出所。転換率（％）はスプレッド実数から算出、ただしCVRセクションのルートA/Bは岡部さんの確定版表記に準拠。
+    </div>
+  </div>
+
+  <div class="sec"><span class="no">2</span><h2>上流ファネル：アタック → LINE登録</h2><span class="cap">配信対象リスト → LINE公式登録まで。配信はSlack報告、登録はスプレッド実数。</span></div>
 
   <div class="upfunnel">
     <div class="uleft">
@@ -328,13 +362,13 @@
     <b>⚠ 注意：</b>配信通数の総計はSlack報告の積み上げで、正確な実配信数はLステップ側の集計が正。初回本配信の1.8%は基準サンプルであり、施策・リストで変動する。
   </div>
 
-  <div class="sec"><span class="no">2</span><h2>段階別の転換率（前工程比CVR）</h2><span class="cap">2つの集客ルートを同じ5フェーズで比較。配信→タップ→登録→同意→日程確定。</span></div>
+  <div class="sec"><span class="no">3</span><h2>段階別の転換率（前工程比CVR）</h2><span class="cap">2つの集客ルートを同じ5フェーズで比較。配信→タップ→登録→同意→日程確定。</span></div>
   <div class="cvrwrap">
     <div class="cvrhead">
       <h3>ルートA ／ MP+登録<u>不要</u>で無料体験できる</h3>
       <span class="cvrtag">AB第一弾・新MP＋VP／6/24〜6/30の7通シナリオ配信</span>
     </div>
-    <div class="cvrsub">母数は配信合計5,221人（新MP 1,740＋VP 3,481）。各段の割合は「前工程比」＝直前ステップに対する転換率。</div>
+    <div class="cvrsub">母数は配信合計5,221人（新MP 1,740＋VP 3,481）。各段の割合は「前工程比」＝直前ステップに対する転換率。<b>出所：LUMINAアタック数値シート＋岡部さん7/29確定版。</b></div>
     <div class="cvrflow">
       <div class="cvrstep s0"><div class="csn">5,221</div><div class="csl">① アタック配信<br>（新MP＋VP）</div></div>
       <div class="cvrconn r1"><div class="arw">▶</div><div class="rate">10.1%</div><div class="rlbl">タップ率</div></div>
@@ -357,7 +391,7 @@
       <h3>ルートB ／ MP+アカウント登録が<u>必須</u>（伊藤さん担当）</h3>
       <span class="cvrtag" style="background:rgba(217,84,42,.12);color:var(--coral-d)">旧MP・LUMINA0721発射リスト 2,500人アタック</span>
     </div>
-    <div class="cvrsub">母数は旧MPの2,500人。無料体験の前にMP+アカウント登録を挟むルートで、送客導線を検証中。フェーズはルートAと揃えて表示。</div>
+    <div class="cvrsub">母数は旧MPの2,500人（LUMINA0721発射リスト）。無料体験の前にMP+アカウント登録を挟むルート。<b>出所：LUMINAアタック数値シート。</b>フェーズはルートAと揃えて表示。</div>
     <div class="cvrflow">
       <div class="cvrstep s0"><div class="csn">2,500</div><div class="csl">① アタック配信<br>（旧MP）</div></div>
       <div class="cvrconn r1"><div class="arw">▶</div><div class="rate">5.0%</div><div class="rlbl">タップ率</div></div>
@@ -380,7 +414,7 @@
     </div>
   </div>
 
-  <div class="sec"><span class="no">3</span><h2>コンバージョンファネル：LINE登録 → 入会（実数）</h2><span class="cap">上流の続き。LINE登録を入口に、反応 → 同意 → 予約 → 実施 → 入会。</span></div>
+  <div class="sec"><span class="no">4</span><h2>コンバージョンファネル：LINE登録 → 入会（実数）</h2><span class="cap">上流の続き。LINE登録を入口に、反応 → 同意 → 予約 → 実施 → 入会。</span></div>
   <div class="funnel">
     <div class="fstage f1"><div class="inner"><div class="fn">359人</div><div class="fl">① LINE公式登録</div><div class="fs">6/10〜8/1で積み上がり・全体の母集団</div></div></div>
     <div class="farrow">▼ <span style="font-size:11px;opacity:.7">反応率 20%</span></div>
@@ -399,7 +433,7 @@
     <b>⚠ 注意点：</b>③同意はフォーム受け口が2系統（自社製フォーム＝台帳61件／Googleフォーム＝回答68件）あり、取りこぼしの指摘あり。68が上限・61が確実の幅で見る。⑤実施は体験日程が8/3までの予約を集計。顧客管理の「体験完了」列に日程経過分27件がFalseで並ぶ（実施報告のTrue化はこれから）。⑥入会は入会規約同意シートで2名がTrue、うち伊藤亮太さんが月2回プランで決済完了。
   </div>
 
-  <div class="sec"><span class="no">4</span><h2>レッスン実施サマリー</h2><span class="cap">「予約」と「実施」を分けて見る。実施はここが最重要指標。</span></div>
+  <div class="sec"><span class="no">5</span><h2>レッスン実施サマリー</h2><span class="cap">「予約」と「実施」を分けて見る。実施はここが最重要指標。</span></div>
   <div class="execwrap">
     <div class="exectop">
       <div class="execbig">
@@ -443,7 +477,7 @@
     </div>
   </div>
 
-  <div class="sec"><span class="no">5</span><h2>数字で見るファネル</h2><span class="cap">スプレッド実データの可視化。転換率・登録の伸び・予約の分布。</span></div>
+  <div class="sec"><span class="no">6</span><h2>数字で見るファネル</h2><span class="cap">スプレッド実データの可視化。転換率・登録の伸び・予約の分布。</span></div>
   <div class="charts">
 
     <div class="chart">
@@ -526,7 +560,7 @@
 
   </div>
 
-  <div class="sec"><span class="no">6</span><h2>事業の全体像</h2><span class="cap">顧客・アプラ・講師の三者。アプラは「場」を提供する仲介者。</span></div>
+  <div class="sec"><span class="no">7</span><h2>事業の全体像</h2><span class="cap">顧客・アプラ・講師の三者。アプラは「場」を提供する仲介者。</span></div>
   <div class="flow">
     <div class="fcard a">
       <div class="ic">🎤</div><div class="role">顧客 / 受講者</div>
@@ -549,7 +583,7 @@
   </div>
   <div class="moneyflow">お金の流れ：<b>顧客 → アプラ → 講師</b>　／　サービスの流れ：<b>講師 → 顧客（マンツーマンレッスン）</b></div>
 
-  <div class="sec"><span class="no">7</span><h2>アタック〜稼働の実績</h2><span class="cap">6月に設計、7/10に初稼働。以降レッスンが継続的に発生している。</span></div>
+  <div class="sec"><span class="no">8</span><h2>アタック〜稼働の実績</h2><span class="cap">6月に設計、7/10に初稼働。以降レッスンが継続的に発生している。</span></div>
   <div class="tl">
     <div class="ev done"><div class="d">6月上旬</div><h4>事業発足・サービス名確定<span class="badge b-done">完了</span></h4><p>アカウント獲得ユニットの課題（新規が使ってくれない）から着想。名称は「Studio LUMINA」に確定。目的＝MP+送客・経済圏拡張で全員合意。</p></div>
     <div class="ev done"><div class="d">6月中旬</div><h4>4書類の作成・リーガルチェック<span class="badge b-done">完了</span></h4><p>覚書・利用規約・重要事項表示・カバーレターを整備。特商法（通信販売該当）、報酬固定額明示、労働者性、クーリングオフ論点まで第2ラウンド反映済み。</p></div>
@@ -565,7 +599,7 @@
     <div class="ev prog"><div class="d">7/21</div><h4>AB第二弾のシナリオ確定・配信準備<span class="badge b-prog">進行中</span></h4><p>配信対象を確定。LUMINAへ直結するのはMP+登録条件のLUMINA枠2,500人で、これがLUMINAの母数。まねきクーポン枠7,170人（旧MP 3,627＋新MP 3,543）は同時に撃つが別導線でLUMINA母数外。VP窓口は今回配信なし。シナリオ完成済み、クリエイティブ準備の上で発射予定。</p></div>
   </div>
 
-  <div class="sec"><span class="no">8</span><h2>AB第二弾の配信設計</h2><span class="cap">LUMINAの母数はA枠のみ。B枠（まねき）はカニバリ領域の別導線。</span></div>
+  <div class="sec"><span class="no">9</span><h2>AB第二弾の配信設計</h2><span class="cap">LUMINAの母数はA枠のみ。B枠（まねき）はカニバリ領域の別導線。</span></div>
   <div class="ab">
     <div class="abx x1">
       <span class="tag">A ／ LUMINA枠 ＝ LUMINA母数</span>
@@ -581,7 +615,7 @@
     </div>
   </div>
 
-  <div class="sec"><span class="no">9</span><h2>4ストリームの進捗</h2><span class="cap">商品・契約・集客・供給。左上ほど固まり、右下ほど運用の詰め。</span></div>
+  <div class="sec"><span class="no">10</span><h2>4ストリームの進捗</h2><span class="cap">商品・契約・集客・供給。左上ほど固まり、右下ほど運用の詰め。</span></div>
   <div class="streams">
     <div class="st s1">
       <div class="sh"><div class="g">商</div><div><h3>商品</h3><div class="sub">プラン・価格・特典</div></div><span class="mini" style="background:rgba(92,154,84,.16);color:var(--done)">確定</span></div>
@@ -611,7 +645,7 @@
     </div>
   </div>
 
-  <div class="sec"><span class="no">10</span><h2>アタックリスト（配信対象マップ）</h2><span class="cap">窓口×リスト温度で整理。緑＝配信済／橙＝配信準備中／紫＝停止方向。</span></div>
+  <div class="sec"><span class="no">11</span><h2>アタックリスト（配信対象マップ）</h2><span class="cap">窓口×リスト温度で整理。緑＝配信済／橙＝配信準備中／紫＝停止方向。</span></div>
   <div class="atk">
     <table>
       <thead><tr><th>窓口</th><th>対象リスト</th><th>人数</th><th>施策</th><th>状態</th></tr></thead>
@@ -630,7 +664,7 @@
     <div class="tsum"><span>LUMINA母数（MP+登録条件）：<b>2,500人</b></span><span class="maneki-only">まねき合計（LUMINA母数外）：<b>7,170人</b></span><span>AB第一弾で配信済500人は除外済み</span></div>
   </div>
 
-  <div class="sec"><span class="no">11</span><h2>進行中のアクション（Next Action）</h2><span class="cap">KPI直結の2軸を最優先に。運用の詰めが残タスクの中心。</span></div>
+  <div class="sec"><span class="no">12</span><h2>進行中のアクション（Next Action）</h2><span class="cap">KPI直結の2軸を最優先に。運用の詰めが残タスクの中心。</span></div>
   <div class="streams">
     <div class="st s3">
       <div class="sh"><div class="g" style="background:var(--coral)">1</div><div><h3>AB第二弾を撃ち切る</h3><div class="sub">集客ストリーム</div></div></div>
